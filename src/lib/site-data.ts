@@ -20,25 +20,26 @@ export const STORES: Store[] = [
     nome: "Unidade Sumaré",
     cidade: "Sumaré",
     bairro: "Matão",
-    endereco: "Av. Emili Bosco, 586 — Matão, Sumaré/SP",
+    endereco: "Av. Emilio Bosco, 586 — Matão, Sumaré/SP — CEP 13180-000",
     detalhes:
       "Estacionamento em frente à loja. Ambiente amplo e familiar, acolhedor e seguro para todas as pessoas.",
     whatsapp: "https://wa.me/5519984475265",
     telefoneLabel: "(19) 98447-5265",
-    maps: "https://www.google.com/maps/search/?api=1&query=Av.+Emili+Bosco,+586,+Mat%C3%A3o,+Sumar%C3%A9+SP",
+    maps: "https://www.google.com/maps/search/?api=1&query=Av.+Emilio+Bosco,+586,+Mat%C3%A3o,+Sumar%C3%A9,+SP,+13180-000",
     foto: lojaSumare,
   },
   {
     id: "hortolandia",
     nome: "Unidade Hortolândia",
     cidade: "Hortolândia",
-    bairro: "Centro",
-    endereco: "Dentro do Supermercado São Vicente — Centro, Hortolândia/SP",
+    bairro: "Jardim das Paineiras",
+    endereco:
+      "Rua Geraldo Denadai, 05, Box 02 — Jardim das Paineiras, Hortolândia/SP — CEP 13184-271",
     detalhes:
-      "Ao lado da lotérica. Loja ampla e climatizada, fácil de encontrar no centro da cidade.",
+      "No estacionamento do Supermercado São Vicente, ao lado da lotérica. Loja ampla e climatizada.",
     whatsapp: "https://wa.me/5519981131761",
     telefoneLabel: "(19) 98113-1761",
-    maps: "https://www.google.com/maps/search/?api=1&query=Supermercado+S%C3%A3o+Vicente+Centro+Hortol%C3%A2ndia+SP",
+    maps: "https://www.google.com/maps/search/?api=1&query=Rua+Geraldo+Denadai,+05,+Jardim+das+Paineiras,+Hortol%C3%A2ndia,+SP,+13184-271",
     foto: lojaHortolandia,
   },
 ];

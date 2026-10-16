@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { STORES } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 const field =
   "w-full border border-border bg-background px-4 py-3 pl-10 text-sm outline-none transition-colors focus:border-ink";
@@ -477,6 +478,7 @@ export function VisionTest() {
 
   function handleLeadSubmit(data: Lead) {
     // TODO: enviar `data` para o destino combinado com o cliente (endpoint/planilha/CRM).
+    trackEvent("vision_test_completed", { form_name: "teste_de_visao" });
     setLead(data);
   }
 

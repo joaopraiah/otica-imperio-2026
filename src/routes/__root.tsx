@@ -18,7 +18,32 @@ import { ORGANIZATION_JSON_LD, WEBSITE_JSON_LD } from "@/lib/seo";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+import { AnalyticsTracker } from "@/components/site/AnalyticsTracker";
+import { ConsentBanner } from "@/components/site/ConsentBanner";
 import { ScrollProgressBar } from "@/components/site/motion-primitives";
+
+const GTM_ID = "GTM-N5W2RCG";
+const CONSENT_MODE_DEFAULT = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted',
+  security_storage: 'granted',
+  wait_for_update: 500
+});
+`;
+const GTM_LOADER = `
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');
+`;
 
 function NotFoundComponent() {
   return (
@@ -105,10 +130,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    scripts: [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD].map((j) => ({
-      type: "application/ld+json",
-      children: JSON.stringify(j),
-    })),
+    scripts: [
+      { type: "text/javascript", children: CONSENT_MODE_DEFAULT },
+      { type: "text/javascript", children: GTM_LOADER },
+      ...[ORGANIZATION_JSON_LD, WEBSITE_JSON_LD].map((j) => ({
+        type: "application/ld+json",
+        children: JSON.stringify(j),
+      })),
+    ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
@@ -128,6 +157,15 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
@@ -144,6 +182,7 @@ function RootComponent() {
       <LazyMotion features={loadMotionFeatures} strict>
         <MotionConfig reducedMotion="user">
           <ScrollProgressBar />
+          <AnalyticsTracker />
           <Header />
           <main>
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -151,6 +190,7 @@ function RootComponent() {
           </main>
           <Footer />
           <WhatsAppFab />
+          <ConsentBanner />
         </MotionConfig>
       </LazyMotion>
     </QueryClientProvider>

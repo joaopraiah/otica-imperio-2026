@@ -161,6 +161,9 @@ export function OrcamentoForm() {
 
       <motion.a
         href={link}
+        data-store={store.id}
+        data-lead-form="orcamento_whatsapp"
+        data-track-location="formulario_orcamento"
         target="_blank"
         rel="noreferrer"
         whileHover={{ y: -2 }}

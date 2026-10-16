@@ -3,6 +3,7 @@ import { Instagram, Facebook } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { GoogleRating } from "@/components/site/ui-bits";
 import { NAV, SOCIAL, STORES } from "@/lib/site-data";
+import { openConsentPreferences } from "@/lib/analytics";
 
 export function Footer() {
   return (
@@ -75,10 +76,17 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-14 w-full max-w-6xl border-t border-ink-foreground/10 pt-6">
+      <div className="mx-auto mt-14 flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 border-t border-ink-foreground/10 pt-6">
         <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-foreground/40">
           © {new Date().getFullYear()} Ótica Império Glasses — Sumaré · Hortolândia
         </p>
+        <button
+          type="button"
+          onClick={openConsentPreferences}
+          className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-foreground/50 transition-colors hover:text-ink-foreground"
+        >
+          Privacidade e cookies
+        </button>
       </div>
     </footer>
   );
